@@ -24,11 +24,11 @@ export function Cube() {
       <motion.div
         className="w-full h-full relative"
         animate={{ 
-          rotateX: isHovered ? 720 : 30, 
-          rotateY: isHovered ? 720 : -45, 
+          rotateX: [0, 360],
+          rotateY: [0, 360], 
         }}
         transition={{
-          duration: isHovered ? 3 : 10,
+          duration: isHovered ? 3 : 15,
           ease: "linear",
           repeat: Infinity,
         }}
@@ -45,14 +45,14 @@ export function Cube() {
           <span className="text-4xl font-black text-black select-none">GD</span>
         </div>
 
-        {/* Back Face: Go - RotateY 180, Translate Z +64px */}
+        {/* Back Face: Golang - RotateY 180, Translate Z +64px */}
         <div style={{ ...faceStyle, transform: 'rotateY(180deg) translateZ(64px)' }}>
-           <span className="text-3xl font-black text-black select-none">Go</span>
+           <span className="text-2xl font-black text-black select-none">Golang</span>
         </div>
 
-        {/* Right Face: Postgres - RotateY 90, Translate Z +64px */}
+        {/* Right Face: AI - RotateY 90, Translate Z +64px */}
         <div style={{ ...faceStyle, transform: 'rotateY(90deg) translateZ(64px)' }}>
-            <span className="text-2xl font-black text-black select-none">Postgres</span>
+            <span className="text-4xl font-black text-black select-none">AI</span>
         </div>
 
         {/* Left Face: TS - RotateY -90, Translate Z +64px */}
