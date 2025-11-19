@@ -8,19 +8,18 @@ export function Gopher() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
+    const updateEyes = (clientX: number, clientY: number) => {
       if (!leftEyeRef.current || !rightEyeRef.current || !containerRef.current) return;
 
-      const updateEye = (eyeGroup: SVGGElement) => {
+      const moveEye = (eyeGroup: SVGGElement) => {
         const eye = eyeGroup.getBoundingClientRect();
         const eyeCenterX = eye.left + eye.width / 2;
         const eyeCenterY = eye.top + eye.height / 2;
 
-        const dx = e.clientX - eyeCenterX;
-        const dy = e.clientY - eyeCenterY;
+        const dx = clientX - eyeCenterX;
+        const dy = clientY - eyeCenterY;
         const angle = Math.atan2(dy, dx);
         
-        // Limit the pupil movement distance
         const maxDistance = 4;
         const distance = Math.min(maxDistance, Math.hypot(dx, dy) / 15);
 
@@ -33,12 +32,26 @@ export function Gopher() {
         }
       };
 
-      updateEye(leftEyeRef.current);
-      updateEye(rightEyeRef.current);
+      moveEye(leftEyeRef.current);
+      moveEye(rightEyeRef.current);
+    };
+
+    const handleMouseMove = (e: MouseEvent) => updateEyes(e.clientX, e.clientY);
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        updateEyes(e.touches[0].clientX, e.touches[0].clientY);
+      }
     };
 
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    window.addEventListener("touchmove", handleTouchMove);
+    window.addEventListener("touchstart", handleTouchMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchstart", handleTouchMove);
+    };
   }, []);
 
   return (
@@ -91,4 +104,3 @@ export function Gopher() {
     </div>
   );
 }
-
