@@ -44,7 +44,7 @@ export function Gopher() {
   return (
     <div 
       ref={containerRef}
-      className="fixed bottom-0 right-8 z-50 w-32 h-24 pointer-events-none"
+      className="fixed bottom-0 right-4 md:right-8 z-50 w-20 h-16 md:w-32 md:h-24 pointer-events-none"
       aria-hidden="true"
     >
       <svg 
