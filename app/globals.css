@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --font-sans: var(--font-sans);
+}
+
+:root {
+  --background: #f9f8f4; /* Light cream background */
+  --foreground: #000000;
+  --primary: #ffdc58; /* The yellow accent */
+  --secondary: #ffffff;
+  --grid-color: #e5e5e5;
+}
+
+body {
+  color: #000000; /* Hardcoded for safety */
+  background-color: #f9f8f4; /* Hardcoded for safety */
+  font-family: Arial, Helvetica, sans-serif;
+  background-image: 
+    linear-gradient(#e5e5e5 1px, transparent 1px),
+    linear-gradient(90deg, #e5e5e5 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: -1px -1px;
+  min-height: 100vh;
+}
+
+/* Ensure text is visible by default */
+h1, h2, h3, h4, h5, h6, p, span, a, li {
+  color: inherit;
+}
+
+/* Brutalist Utilities */
+@utility brutal-border {
+  border: 2px solid #000000;
+}
+
+@utility brutal-shadow {
+  box-shadow: 4px 4px 0px 0px #000000;
+}
+
+@utility brutal-shadow-sm {
+  box-shadow: 2px 2px 0px 0px #000000;
+}
+
+@utility brutal-btn {
+  @apply inline-flex items-center justify-center px-6 py-3 text-sm font-bold text-black bg-[#ffdc58] transition-transform hover:-translate-y-0.5 active:translate-y-0 brutal-border brutal-shadow;
+}
+
+@utility brutal-card {
+  @apply bg-white brutal-border brutal-shadow p-6;
+}
