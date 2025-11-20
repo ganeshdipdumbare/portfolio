@@ -19,8 +19,10 @@ export function Gopher() {
         const eyeCenterX = eye.left + eye.width / 2;
         const eyeCenterY = eye.top + eye.height / 2;
 
+        // Calculate distance from eye center to mouse
         const dx = clientX - eyeCenterX;
         const dy = clientY - eyeCenterY;
+        
         const angle = Math.atan2(dy, dx);
         
         // Limit the pupil movement within the eye
@@ -70,13 +72,13 @@ export function Gopher() {
 
   return (
     <motion.div 
-      initial={{ y: 100, opacity: 0 }}
+      initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: "spring", stiffness: 260, damping: 20, delay: 1 }}
-      className="fixed bottom-0 right-4 md:right-12 z-50 w-24 h-20 md:w-36 md:h-28 cursor-pointer pointer-events-auto"
+      className="fixed top-16 right-4 md:right-12 z-50 w-24 h-20 md:w-36 md:h-28 cursor-pointer pointer-events-auto"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      whileHover={{ y: -10 }}
+      whileHover={{ y: 5 }}
       role="img"
       aria-label="Cute Golang Gopher mascot"
     >
@@ -103,14 +105,36 @@ export function Gopher() {
             <stop offset="0%" stopColor="white" stopOpacity="0.9" />
             <stop offset="100%" stopColor="white" stopOpacity="0" />
           </radialGradient>
+
+          {/* Body Bottom Shadow Gradient */}
+          <linearGradient id="bodyBottomShadow" x1="50%" y1="0%" x2="50%" y2="100%">
+            <stop offset="0%" stopColor="black" stopOpacity="0" />
+            <stop offset="100%" stopColor="black" stopOpacity="0.5" />
+          </linearGradient>
         </defs>
 
-        {/* Body Shape - Rounded and cute */}
+        {/* Hole - Dark ellipse to simulate emerging from */}
+        <ellipse cx="60" cy="95" rx="42" ry="10" fill="#000000" opacity="0.6" />
+
+        {/* Body Shape - Rounded bottom to fit in hole (No stroke at bottom for seamless look) */}
         <path 
-          d="M25,100 L25,55 C25,25 45,12 60,12 C75,12 95,25 95,55 L95,100 Z" 
+          d="M25,90 Q60,120 95,90 L95,55 C95,25 75,12 60,12 C45,12 25,25 25,55 Z" 
           fill="url(#bodyGradient)" 
+        />
+        
+        {/* Body Shadow Overlay for Depth */}
+        <path 
+          d="M25,90 Q60,120 95,90 L95,80 Q60,110 25,80 Z" 
+          fill="url(#bodyBottomShadow)" 
+        />
+
+        {/* Body Stroke - Open at bottom */}
+        <path 
+          d="M25,90 L25,55 C25,25 45,12 60,12 C75,12 95,25 95,55 L95,90" 
+          fill="none" 
           stroke="#005f7f" 
           strokeWidth="1.5" 
+          strokeLinecap="round"
         />
         
         {/* Left Ear */}
