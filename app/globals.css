@@ -5,49 +5,64 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
+  --color-gopher: var(--gopher);
+  --color-gcp: var(--gcp);
+  --color-ai: var(--ai);
   --font-sans: var(--font-sans);
 }
 
 :root {
-  --background: #f9f8f4; /* Light cream background */
-  --foreground: #000000;
-  --primary: #ffdc58; /* The yellow accent */
+  --background: #fdfbf7; /* Slightly warmer/lighter cream */
+  --foreground: #1a1a1a; /* Softer black */
+  --primary: #FFD700; /* Vibrant Gold */
   --secondary: #ffffff;
+  --gopher: #00ADD8; /* Golang Blue */
+  --gcp: #4285F4; /* Google Blue */
+  --ai: #8B5CF6; /* Purple */
   --grid-color: #e5e5e5;
 }
 
 body {
-  color: #000000; /* Hardcoded for safety */
-  background-color: #f9f8f4; /* Hardcoded for safety */
-  font-family: Arial, Helvetica, sans-serif;
-  background-image: 
-    linear-gradient(#e5e5e5 1px, transparent 1px),
-    linear-gradient(90deg, #e5e5e5 1px, transparent 1px);
-  background-size: 40px 40px;
-  background-position: -1px -1px;
+  color: var(--foreground);
+  background-color: var(--background);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  
+  /* Dot pattern instead of grid for a cleaner look */
+  background-image: radial-gradient(#d4d4d4 1px, transparent 1px);
+  background-size: 24px 24px;
   min-height: 100vh;
 }
 
 /* Ensure text is visible by default */
-h1, h2, h3, h4, h5, h6, p, span, a, li {
+h1, h2, h3, h4, h5, h6, p, span, li {
   color: inherit;
 }
 
-/* Brutalist Utilities */
+/* Selection color */
+::selection {
+  background-color: var(--primary);
+  color: black;
+}
+
+/* Brutalist Utilities with a Modern Twist */
 @utility brutal-border {
-  border: 2px solid #000000;
+  border: 2px solid #1a1a1a;
 }
 
 @utility brutal-shadow {
-  box-shadow: 4px 4px 0px 0px #000000;
+  box-shadow: 4px 4px 0px 0px #1a1a1a;
 }
 
 @utility brutal-shadow-sm {
-  box-shadow: 2px 2px 0px 0px #000000;
+  box-shadow: 2px 2px 0px 0px #1a1a1a;
+}
+
+@utility brutal-shadow-hover {
+  box-shadow: 6px 6px 0px 0px #1a1a1a;
 }
 
 @utility brutal-btn {
-  @apply inline-flex items-center justify-center px-6 py-3 text-sm font-bold text-black bg-[#ffdc58] transition-transform hover:-translate-y-0.5 active:translate-y-0 brutal-border brutal-shadow;
+  @apply inline-flex items-center justify-center px-6 py-3 text-sm font-bold text-black bg-[#FFD700] transition-all hover:-translate-y-0.5 active:translate-y-0 brutal-border brutal-shadow hover:shadow-[6px_6px_0px_0px_#1a1a1a];
 }
 
 @utility brutal-card {
