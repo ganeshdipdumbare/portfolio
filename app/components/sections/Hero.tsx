@@ -17,16 +17,16 @@ export function Hero() {
           className="mx-auto max-w-4xl"
         >
           <h1 className="text-5xl font-black tracking-tight text-black md:text-7xl lg:text-8xl leading-[1.1]">
-            The <span className="text-transparent bg-clip-text bg-gradient-to-r from-black to-neutral-800">Backend</span> <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-black to-neutral-800">Senior</span> <br />
             <span className="relative inline-block mx-2">
-              Engineering
+              Backend
               {/* Underline decoration */}
               <svg className="absolute -bottom-2 left-0 w-full h-4 text-primary opacity-80 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
                 <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="none" />
               </svg>
             </span> <br/>
             <span className="relative inline-block text-gopher">
-               Powerhouse
+               Engineer
             </span>
           </h1>
 

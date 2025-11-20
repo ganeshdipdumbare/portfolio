@@ -3,12 +3,13 @@
 import { Container } from "../ui/Container";
 import { Terminal } from "lucide-react";
 import { resumeData } from "@/app/data/resume";
+import Link from "next/link";
 
 export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b-2 border-black transition-all">
       <Container className="flex h-16 items-center justify-between px-4 max-w-none">
-        <div className="flex items-center gap-2 group cursor-pointer">
+        <Link href="/" className="flex items-center gap-2 group cursor-pointer">
           <div className="flex h-10 w-10 items-center justify-center bg-primary border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-none group-hover:translate-x-[2px] group-hover:translate-y-[2px] transition-all">
              <span className="text-xl font-black">GD</span>
           </div>
@@ -16,7 +17,7 @@ export function Header() {
             <span className="font-bold text-lg tracking-tight group-hover:text-gopher transition-colors">Ganeshdip</span>
             <span className="text-xs text-neutral-500 font-mono">Dumbare</span>
           </div>
-        </div>
+        </Link>
 
         <nav className="hidden md:flex items-center gap-6 font-mono text-sm font-bold">
              <a href="#experience" className="relative hover:text-gopher transition-colors after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-0 after:h-1 after:bg-gopher after:transition-all hover:after:w-full">Experience</a>
