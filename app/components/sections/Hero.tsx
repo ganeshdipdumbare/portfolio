@@ -89,7 +89,7 @@ export function Hero() {
                   )}
                 </button>
               </div>
-              <div className="bg-black/25 dark:bg-black/25 border border-midground/20 px-3 py-2.5 text-xs text-midground/90 lowercase flex justify-between items-center">
+              <div className="bg-black/25 dark:bg-black/25 border border-midground/20 px-3 py-2.5 text-xs text-midground/90 lowercase overflow-x-auto whitespace-nowrap scrollbar-thin">
                 <code>git clone https://github.com/ganeshdipdumbare/portfolio.git</code>
               </div>
             </div>
@@ -115,7 +115,7 @@ export function Hero() {
                   )}
                 </button>
               </div>
-              <div className="bg-black/25 dark:bg-black/25 border border-midground/20 px-3 py-2.5 text-xs text-midground/90 lowercase flex justify-between items-center">
+              <div className="bg-black/25 dark:bg-black/25 border border-midground/20 px-3 py-2.5 text-xs text-midground/90 lowercase overflow-x-auto whitespace-nowrap scrollbar-thin">
                 <code>cd portfolio && npm i && npm run dev</code>
               </div>
             </div>
