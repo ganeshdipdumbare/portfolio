@@ -8,7 +8,7 @@ export function Experience() {
     <section id="experience" className="relative border-b border-midground/15 max-w-[1600px] mx-auto select-none">
       {/* Brutalist Grid Container */}
       <div className="grid grid-cols-12 w-full text-midground">
-        
+
         {/* Full-Width Grid Header */}
         <div className="col-span-12 border-b border-midground/15 p-6 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
@@ -28,8 +28,8 @@ export function Experience() {
         {resumeData.experience.map((role, index) => {
           // Determine grid border configuration based on column index for neat 2-col visual dividers
           const isEven = index % 2 === 0;
-          const cellBorderClass = isEven 
-            ? "border-b md:border-r border-midground/15" 
+          const cellBorderClass = isEven
+            ? "border-b md:border-r border-midground/15"
             : "border-b border-midground/15";
 
           return (
@@ -55,7 +55,7 @@ export function Experience() {
                   {role.role}
                 </span>
 
-                <div className="grid grid-cols-3 gap-y-1.5 text-[11px] tracking-wider text-midground/60 border-t border-b border-midground/10 py-2.5 mt-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-3 gap-y-2 sm:gap-y-0 md:gap-y-2 lg:gap-y-0 gap-x-4 text-[11px] tracking-wider text-midground/60 border-t border-b border-midground/10 py-2.5 mt-2">
                   <div>
                     <span className="text-midground/40 mr-1.5 uppercase font-bold">COMPANY:</span>
                     <span className="text-midground">{role.company}</span>

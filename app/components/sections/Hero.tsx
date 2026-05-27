@@ -20,7 +20,7 @@ export function Hero() {
     <section className="relative pt-24 lg:pt-32 border-b border-midground/15 max-w-[1600px] mx-auto select-none">
       {/* 2-Column Desktop Grid Layout */}
       <div className="grid grid-cols-12 w-full text-midground">
-        
+
         {/* Left Cell: Main Info & Actions */}
         <div className="col-span-12 lg:col-span-7 border-r border-midground/15 p-6 md:p-12 flex flex-col justify-center gap-8 relative group">
           {/* subtle hover glow inside grid cell */}
