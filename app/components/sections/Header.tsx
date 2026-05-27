@@ -2,11 +2,15 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
 import { resumeData } from "@/app/data/resume";
 import { ScrambleText } from "../ui/ScrambleText";
 
 export function Header() {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const [mobileHoveredLink, setMobileHoveredLink] = useState<string | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [theme, setTheme] = useState<"dark" | "light">("light");
 
   const toggleTheme = () => {
@@ -129,7 +133,7 @@ export function Header() {
 
       {/* Mobile Flat Layout */}
       <div className="flex lg:hidden items-center justify-between p-4 text-midground w-full">
-        <Link href="/">
+        <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
           <h2 className="font-sans text-[18px] font-extrabold tracking-widest text-midground">
             GANESHDIP
           </h2>
@@ -158,8 +162,96 @@ export function Header() {
           >
             HIRE_ME
           </a>
+
+          {/* Hamburger Menu Toggle */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+            className="p-1.5 border border-midground/30 bg-midground/5 hover:bg-midground/10 cursor-pointer flex items-center justify-center text-midground shrink-0"
+          >
+            {isMobileMenuOpen ? (
+              <X className="size-4" />
+            ) : (
+              <Menu className="size-4" />
+            )}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu Drawer */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:hidden w-full border-t border-midground/15 bg-[#041c1c]/95 dark:bg-background/95 backdrop-blur-md overflow-hidden"
+          >
+            <nav className="flex flex-col text-midground">
+              <a
+                href="#experience"
+                onClick={() => setIsMobileMenuOpen(false)}
+                onMouseEnter={() => setMobileHoveredLink("experience")}
+                onMouseLeave={() => setMobileHoveredLink(null)}
+                className="border-b border-midground/15 p-5 flex items-center justify-between group relative cursor-pointer overflow-hidden"
+              >
+                <span className="text-xs tracking-[0.18em] font-mono">
+                  <ScrambleText text="Experience" trigger={mobileHoveredLink === "experience"} />
+                  <span className="blink hidden group-hover:inline-block dither ml-1.5 w-[1.2ch] -mb-[0.15em] h-[1.1em]"></span>
+                </span>
+                <span className="text-yellow-hl text-[10px] font-mono opacity-60 group-hover:opacity-100">[01]</span>
+                <span className="absolute inset-1 bg-midground pointer-events-none transition-opacity duration-250 group-hover:opacity-5 opacity-0 group-hover:duration-0"></span>
+              </a>
+
+              <a
+                href="#skills"
+                onClick={() => setIsMobileMenuOpen(false)}
+                onMouseEnter={() => setMobileHoveredLink("skills")}
+                onMouseLeave={() => setMobileHoveredLink(null)}
+                className="border-b border-midground/15 p-5 flex items-center justify-between group relative cursor-pointer overflow-hidden"
+              >
+                <span className="text-xs tracking-[0.18em] font-mono">
+                  <ScrambleText text="Skills" trigger={mobileHoveredLink === "skills"} />
+                  <span className="blink hidden group-hover:inline-block dither ml-1.5 w-[1.2ch] -mb-[0.15em] h-[1.1em]"></span>
+                </span>
+                <span className="text-yellow-hl text-[10px] font-mono opacity-60 group-hover:opacity-100">[02]</span>
+                <span className="absolute inset-1 bg-midground pointer-events-none transition-opacity duration-250 group-hover:opacity-5 opacity-0 group-hover:duration-0"></span>
+              </a>
+
+              <a
+                href="#certifications"
+                onClick={() => setIsMobileMenuOpen(false)}
+                onMouseEnter={() => setMobileHoveredLink("certifications")}
+                onMouseLeave={() => setMobileHoveredLink(null)}
+                className="border-b border-midground/15 p-5 flex items-center justify-between group relative cursor-pointer overflow-hidden"
+              >
+                <span className="text-xs tracking-[0.18em] font-mono">
+                  <ScrambleText text="Certifications" trigger={mobileHoveredLink === "certifications"} />
+                  <span className="blink hidden group-hover:inline-block dither ml-1.5 w-[1.2ch] -mb-[0.15em] h-[1.1em]"></span>
+                </span>
+                <span className="text-yellow-hl text-[10px] font-mono opacity-60 group-hover:opacity-100">[03]</span>
+                <span className="absolute inset-1 bg-midground pointer-events-none transition-opacity duration-250 group-hover:opacity-5 opacity-0 group-hover:duration-0"></span>
+              </a>
+
+              <a
+                href="#education"
+                onClick={() => setIsMobileMenuOpen(false)}
+                onMouseEnter={() => setMobileHoveredLink("education")}
+                onMouseLeave={() => setMobileHoveredLink(null)}
+                className="p-5 flex items-center justify-between group relative cursor-pointer overflow-hidden"
+              >
+                <span className="text-xs tracking-[0.18em] font-mono">
+                  <ScrambleText text="Education" trigger={mobileHoveredLink === "education"} />
+                  <span className="blink hidden group-hover:inline-block dither ml-1.5 w-[1.2ch] -mb-[0.15em] h-[1.1em]"></span>
+                </span>
+                <span className="text-yellow-hl text-[10px] font-mono opacity-60 group-hover:opacity-100">[04]</span>
+                <span className="absolute inset-1 bg-midground pointer-events-none transition-opacity duration-250 group-hover:opacity-5 opacity-0 group-hover:duration-0"></span>
+              </a>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
