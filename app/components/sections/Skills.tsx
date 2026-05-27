@@ -31,7 +31,7 @@ export function Skills() {
     <section id="skills" className="relative border-b border-midground/15 max-w-[1600px] mx-auto select-none">
       {/* Grid Layout Container */}
       <div className="grid grid-cols-12 w-full text-midground">
-        
+
         {/* Full-width Section Header */}
         <div className="col-span-12 border-b border-midground/15 p-6 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
