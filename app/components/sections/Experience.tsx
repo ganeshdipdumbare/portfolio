@@ -1,81 +1,91 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Container } from "../ui/Container";
 import { resumeData } from "@/app/data/resume";
-import { Calendar, MapPin, Building2 } from "lucide-react";
-
-const COLORS = [
-  { border: "hover:border-gopher", shadow: "hover:shadow-gopher/20", bg: "group-hover:bg-gopher" },
-  { border: "hover:border-gcp", shadow: "hover:shadow-gcp/20", bg: "group-hover:bg-gcp" },
-  { border: "hover:border-ai", shadow: "hover:shadow-ai/20", bg: "group-hover:bg-ai" },
-  { border: "hover:border-primary", shadow: "hover:shadow-primary/20", bg: "group-hover:bg-primary" },
-];
 
 export function Experience() {
   return (
-    <section id="experience" className="py-24 relative bg-[#fdfbf7]">
-      <Container>
-        <div className="mb-16 border-l-4 border-black pl-6 bg-white py-4 max-w-3xl relative shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-          <h2 className="text-4xl font-black tracking-tight text-black md:text-5xl">Professional Experience</h2>
-          <div className="absolute -right-2 -top-2 w-4 h-4 bg-primary border-2 border-black" />
+    <section id="experience" className="relative border-b border-midground/15 max-w-[1600px] mx-auto select-none">
+      {/* Brutalist Grid Container */}
+      <div className="grid grid-cols-12 w-full text-midground">
+        
+        {/* Full-Width Grid Header */}
+        <div className="col-span-12 border-b border-midground/15 p-6 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="font-pixel text-[9px] tracking-widest text-yellow-hl border border-midground/20 bg-midground/5 px-2 py-0.5 uppercase">
+              NODE // 01
+            </span>
+            <h2 className="font-sans text-2xl md:text-3xl font-extrabold tracking-wider text-midground">
+              PROFESSIONAL EXPERIENCE
+            </h2>
+          </div>
+          <span className="font-mono text-xs tracking-wider text-midground/40">
+            [TOTAL_NODES_INDEXED: {resumeData.experience.length}]
+          </span>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2">
-          {resumeData.experience.map((role, index) => {
-            const colorTheme = COLORS[index % COLORS.length];
-            
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`relative p-8 bg-white border-2 border-dashed border-black transition-all duration-300 hover:border-solid hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 group overflow-hidden`}
-              >
-                {/* Corner Accents */}
-                <div className="absolute -top-1.5 -left-1.5 w-3 h-3 bg-black transition-transform group-hover:rotate-45" />
-                <div className="absolute -top-1.5 -right-1.5 w-3 h-3 bg-black transition-transform group-hover:rotate-45" />
-                <div className="absolute -bottom-1.5 -left-1.5 w-3 h-3 bg-black transition-transform group-hover:rotate-45" />
-                <div className="absolute -bottom-1.5 -right-1.5 w-3 h-3 bg-black transition-transform group-hover:rotate-45" />
+        {/* Grid Cells for Roles */}
+        {resumeData.experience.map((role, index) => {
+          // Determine grid border configuration based on column index for neat 2-col visual dividers
+          const isEven = index % 2 === 0;
+          const cellBorderClass = isEven 
+            ? "border-b md:border-r border-midground/15" 
+            : "border-b border-midground/15";
 
-                {/* Hover Background Gradient - Very subtle */}
-                <div className={`absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-300 ${colorTheme.bg.replace('group-hover:', '')}`} />
+          return (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.05 }}
+              className={`col-span-12 md:col-span-6 p-6 md:p-10 relative overflow-hidden group flex flex-col gap-6 ${cellBorderClass}`}
+            >
+              {/* Subtle hover highlight glow */}
+              <span className="absolute inset-0 bg-midground pointer-events-none transition-opacity duration-300 opacity-0 group-hover:opacity-[0.03]" />
 
-                <div className="mb-6 relative z-10">
-                  <h3 className={`text-2xl font-bold text-neutral-900 transition-colors bg-transparent ${colorTheme.bg} group-hover:text-white w-fit px-2 -ml-2`}>
-                    {role.role}
-                  </h3>
-                  <div className="mt-2 flex flex-wrap items-center gap-y-2 gap-x-4 text-sm font-mono text-neutral-600">
-                    <span className={`flex items-center gap-1 bg-neutral-100 px-2 py-0.5 rounded-sm border border-black/10 ${colorTheme.bg} group-hover:border-black group-hover:text-white transition-colors`}>
-                      <Building2 className="h-3.5 w-3.5" />
-                      {role.company}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Calendar className="h-3.5 w-3.5" />
-                      {role.period}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <MapPin className="h-3.5 w-3.5" />
-                      {role.location}
-                    </span>
+              {/* Grid cell corner decorations */}
+              <div className="absolute right-3 top-3 font-pixel text-[8px] text-midground/20 group-hover:text-yellow-hl transition-colors">
+                [EX_0{index + 1}]
+              </div>
+
+              {/* Metadata Panel */}
+              <div className="flex flex-col gap-2 relative z-10 font-mono">
+                <span className="text-xs font-bold text-yellow-hl tracking-widest uppercase">
+                  {role.role}
+                </span>
+
+                <div className="grid grid-cols-3 gap-y-1.5 text-[11px] tracking-wider text-midground/60 border-t border-b border-midground/10 py-2.5 mt-2">
+                  <div>
+                    <span className="text-midground/40 mr-1.5 uppercase font-bold">COMPANY:</span>
+                    <span className="text-midground">{role.company}</span>
+                  </div>
+                  <div>
+                    <span className="text-midground/40 mr-1.5 uppercase font-bold">PERIOD:</span>
+                    <span className="text-midground">{role.period}</span>
+                  </div>
+                  <div>
+                    <span className="text-midground/40 mr-1.5 uppercase font-bold">LOC:</span>
+                    <span className="text-midground">{role.location}</span>
                   </div>
                 </div>
+              </div>
 
-                <ul className="space-y-3 relative z-10">
-                  {role.description.map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 text-neutral-800">
-                      <span className={`mt-1.5 h-2 w-2 flex-shrink-0 bg-black border border-black ${colorTheme.bg} group-hover:border-white transition-colors`} />
-                      <p className="leading-relaxed text-sm">{item}</p>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            );
-          })}
-        </div>
-      </Container>
+              {/* Achievements details */}
+              <ul className="flex flex-col gap-3 relative z-10 font-mono text-[12px] leading-relaxed text-midground/80 normal-case">
+                {role.description.map((item, i) => (
+                  <li key={i} className="flex items-start gap-2.5">
+                    <span className="text-yellow-hl select-none mt-0.5">▪</span>
+                    <p>{item}</p>
+                  </li>
+                ))}
+              </ul>
+
+            </motion.div>
+          );
+        })}
+
+      </div>
     </section>
   );
 }
