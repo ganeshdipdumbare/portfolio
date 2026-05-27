@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -23,10 +23,36 @@ export function Header() {
     }
   };
 
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+
+    // Yield to the browser layout thread so the drawer state change initiates cleanly
+    setTimeout(() => {
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        const isMobile = window.innerWidth < 1024;
+        // 70px on mobile, 90px on desktop gives perfect, elegant breathing room below the fixed header!
+        const headerOffset = isMobile ? 70 : 90;
+        
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+
+        // Update URL hash without causing a page jump
+        window.history.pushState(null, "", `#${targetId}`);
+      }
+    }, 10);
+  };
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#041c1c]/90 dark:bg-background/90 backdrop-blur-md transition-all border-b border-midground/15 max-w-[1600px] mx-auto">
+    <header className="fixed top-0 left-0 right-0 w-full z-[99999] bg-background-translucent backdrop-blur-lg border-b border-midground/15">
       {/* Desktop Brutalist Grid Header */}
-      <div className="hidden lg:grid grid-cols-12 w-full select-none text-midground">
+      <div className="hidden lg:grid grid-cols-12 w-full select-none text-midground max-w-[1600px] mx-auto">
         {/* Column 1: Brand Logo (Sized to col-span-2) */}
         <Link 
           href="/" 
@@ -40,6 +66,7 @@ export function Header() {
         {/* Column 2: Experience Nav (col-span-2) */}
         <a 
           href="#experience" 
+          onClick={(e) => handleScroll(e, "experience")}
           onMouseEnter={() => setHoveredLink("experience")}
           onMouseLeave={() => setHoveredLink(null)}
           className="col-span-2 border-r border-midground/15 p-5 flex items-center justify-between group relative cursor-pointer overflow-hidden"
@@ -54,6 +81,7 @@ export function Header() {
         {/* Column 3: Skills Nav (col-span-2) */}
         <a 
           href="#skills" 
+          onClick={(e) => handleScroll(e, "skills")}
           onMouseEnter={() => setHoveredLink("skills")}
           onMouseLeave={() => setHoveredLink(null)}
           className="col-span-2 border-r border-midground/15 p-5 flex items-center justify-between group relative cursor-pointer overflow-hidden"
@@ -68,6 +96,7 @@ export function Header() {
         {/* Column 4: Certifications Nav (col-span-2) */}
         <a 
           href="#certifications" 
+          onClick={(e) => handleScroll(e, "certifications")}
           onMouseEnter={() => setHoveredLink("certifications")}
           onMouseLeave={() => setHoveredLink(null)}
           className="col-span-2 border-r border-midground/15 p-5 flex items-center justify-between group relative cursor-pointer overflow-hidden"
@@ -82,6 +111,7 @@ export function Header() {
         {/* Column 5: Education Nav (col-span-2) */}
         <a 
           href="#education" 
+          onClick={(e) => handleScroll(e, "education")}
           onMouseEnter={() => setHoveredLink("education")}
           onMouseLeave={() => setHoveredLink(null)}
           className="col-span-2 border-r border-midground/15 p-5 flex items-center justify-between group relative cursor-pointer overflow-hidden"
@@ -132,7 +162,7 @@ export function Header() {
       </div>
 
       {/* Mobile Flat Layout */}
-      <div className="flex lg:hidden items-center justify-between p-4 text-midground w-full">
+      <div className="flex lg:hidden items-center justify-between p-4 text-midground w-full max-w-[1600px] mx-auto">
         <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
           <h2 className="font-sans text-[18px] font-extrabold tracking-widest text-midground">
             GANESHDIP
@@ -186,12 +216,12 @@ export function Header() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:hidden w-full border-t border-midground/15 bg-[#041c1c]/95 dark:bg-background/95 backdrop-blur-md overflow-hidden"
+            className="lg:hidden w-full border-t border-midground/15 bg-background-translucent-drawer backdrop-blur-md overflow-hidden max-w-[1600px] mx-auto"
           >
             <nav className="flex flex-col text-midground">
               <a
                 href="#experience"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(e) => handleScroll(e, "experience")}
                 onMouseEnter={() => setMobileHoveredLink("experience")}
                 onMouseLeave={() => setMobileHoveredLink(null)}
                 className="border-b border-midground/15 p-5 flex items-center justify-between group relative cursor-pointer overflow-hidden"
@@ -206,7 +236,7 @@ export function Header() {
 
               <a
                 href="#skills"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(e) => handleScroll(e, "skills")}
                 onMouseEnter={() => setMobileHoveredLink("skills")}
                 onMouseLeave={() => setMobileHoveredLink(null)}
                 className="border-b border-midground/15 p-5 flex items-center justify-between group relative cursor-pointer overflow-hidden"
@@ -221,7 +251,7 @@ export function Header() {
 
               <a
                 href="#certifications"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(e) => handleScroll(e, "certifications")}
                 onMouseEnter={() => setMobileHoveredLink("certifications")}
                 onMouseLeave={() => setMobileHoveredLink(null)}
                 className="border-b border-midground/15 p-5 flex items-center justify-between group relative cursor-pointer overflow-hidden"
@@ -236,7 +266,7 @@ export function Header() {
 
               <a
                 href="#education"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(e) => handleScroll(e, "education")}
                 onMouseEnter={() => setMobileHoveredLink("education")}
                 onMouseLeave={() => setMobileHoveredLink(null)}
                 className="p-5 flex items-center justify-between group relative cursor-pointer overflow-hidden"

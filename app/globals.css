@@ -2,6 +2,8 @@
 
 @theme {
   --color-background: var(--background);
+  --color-background-translucent: var(--background-translucent);
+  --color-background-translucent-drawer: var(--background-translucent-drawer);
   --color-foreground: var(--foreground);
   --color-midground: var(--midground);
   --color-primary: var(--midground);
@@ -14,6 +16,8 @@
 
 :root {
   --background: #ffe6cb;
+  --background-translucent: rgba(255, 230, 203, 0.6);
+  --background-translucent-drawer: rgba(255, 230, 203, 0.9);
   --midground: #041c1c;
   --foreground: #000000;
   --secondary: rgba(4, 28, 28, 0.05);
@@ -24,6 +28,8 @@
 
 :root.dark {
   --background: #041c1c;
+  --background-translucent: rgba(4, 28, 28, 0.6);
+  --background-translucent-drawer: rgba(4, 28, 28, 0.9);
   --midground: #ffe6cb;
   --foreground: #ffffff;
   --secondary: rgba(255, 230, 203, 0.05);
@@ -62,7 +68,7 @@ body::after {
   z-index: 1;
 }
 
-main, header, footer {
+main, footer {
   position: relative;
   z-index: 10;
 }
@@ -133,4 +139,16 @@ h1, h2, h3, h4, h5, h6, p, span, li, a {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--midground);
 }
+
+/* Ensure smooth scrolling offsets for the fixed header */
+section[id] {
+  scroll-margin-top: 80px;
+}
+
+@media (max-w: 1024px) {
+  section[id] {
+    scroll-margin-top: 70px;
+  }
+}
+
 
