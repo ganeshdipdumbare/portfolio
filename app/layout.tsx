@@ -1,18 +1,25 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Syne, Space_Mono, Pixelify_Sans } from "next/font/google";
 import "./globals.css";
 import { Header } from "./components/sections/Header";
-import { Gopher } from "./components/ui/Gopher";
 import { Analytics } from "@vercel/analytics/next";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const syne = Syne({
+  variable: "--font-syne",
   subsets: ["latin"],
+  weight: ["400", "700", "800"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const spaceMono = Space_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
+  weight: ["400", "700"],
+});
+
+const pixelifySans = Pixelify_Sans({
+  variable: "--font-pixelify",
+  subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -26,18 +33,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body
         suppressHydrationWarning
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground min-h-screen`}
+        className={`${syne.variable} ${spaceMono.variable} ${pixelifySans.variable} antialiased bg-background text-midground min-h-screen font-mono uppercase`}
       >
         <Header />
-        <main className="pt-16">
+        <main>
           {children}
         </main>
-        <Gopher />
         <Analytics />
       </body>
     </html>
   );
 }
+
+

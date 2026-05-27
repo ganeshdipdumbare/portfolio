@@ -143,5 +143,69 @@ export const resumeData = {
     practices: ["Microservices", "DDD", "Clean Code", "Scrum", "JIRA", "Confluence", "CI/CD", "ArgoCD", "GitHub Actions", "Terraform"],
     monitoring: ["NewRelic", "Grafana", "Prometheus", "Jaeger", "Elastic"]
   },
+  certifications: [
+    {
+      name: "Agentic AI",
+      issuer: "DeepLearning.AI",
+      date: "11/2025",
+      id: "Skills: Agents, AI"
+    },
+    {
+      name: "Large Language Models: Application through Production",
+      issuer: "edX",
+      date: "03/2024",
+      id: "ID: afd9bd5892624d8c9df7aebf4b2486cd"
+    },
+    {
+      name: "Domain Driven Design Made Easy",
+      issuer: "Educative",
+      date: "01/2023",
+      id: "ID: k5m3gACX78GnwynlYUkOnPGBQyQGsn"
+    },
+    {
+      name: "Pragmatic System Design",
+      issuer: "Udemy",
+      date: "07/2022",
+      id: "ID: UC-419150cb-4eb2-44cc-82b4-7471a59d69b9"
+    },
+    {
+      name: "Microservices: Designing Highly Scalable Systems",
+      issuer: "Udemy",
+      date: "07/2022",
+      id: "ID: UC-0526207a-d7e3-48ac-9221-59b2fab5aeee"
+    },
+    {
+      name: "Ultimate Kubernetes",
+      issuer: "Udemy",
+      date: "07/2022",
+      id: "ID: UC-ae678fdf-e684-4172-be67-c3aad9e44fd5"
+    },
+    {
+      name: "Programming with Google Go",
+      issuer: "University of California, Irvine",
+      date: "05/2020",
+      id: "ID: MPW82DUCG8F8"
+    },
+    {
+      name: "Kubernetes for the Absolute Beginners - Hands-on",
+      issuer: "KodeKloud",
+      date: "03/2019",
+      id: "ID: cert_mmnhtgyq"
+    },
+    {
+      name: "Certified Blockchain Developer",
+      issuer: "Blockchain Council",
+      date: "12/2017",
+      id: "ID: 11100219"
+    },
+    {
+      name: "IBM Blockchain Essentials",
+      issuer: "IBM",
+      date: "12/2017",
+      id: "Verified Credential"
+    }
+  ],
+
   interests: ["Running", "Cycling", "Hiking"]
 };
+
